@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Home</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <style>
+      .control1{
+        background-color: #007bff;
+        border-color: #007bff;
+        color:white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container mt-3">
+     <h3 class="text-center">Students Update</h3>
+     <form action="/edit" method="post">
+       <!-- <input type="hidden" name="id" value="<%=data.id%>"> -->
+         <label for="id">id</label>
+         <input type="text" name="id" value="<%=data.id%>" class="form-control">
+         <label for="name">FirstName</label>
+         <input type="text" name="name" value="<%=data.FirstName%>" class="form-control">
+         <label for="name">LastName</label>
+         <input type="text" name="name" value="<%=data.LastName%>" class="form-control">
+         <label for="email">Email</label>
+         <input type="text" name="email" value="<%=data.Email%>" class="form-control"><br>
+         <input type="submit" value="Update" class="form-control control1"><br>
+         <a href="/">Return?</a>
+     </form>
+    </div>
+  </body>
+</html>
