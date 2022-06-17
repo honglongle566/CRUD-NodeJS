@@ -13,14 +13,24 @@
     />
     <style>
       .btn-info{
-        margin-bottom: 1.5px;
+        margin-bottom: -53px;
       }
       .tit{
         text-align: center;
       }
     .search-container{
       float: right;
-      padding-top: 7px ;
+      padding-top: 7px;
+      display: block;
+      text-align: left;
+      border: 1px solid #ccc;
+    }
+    .search-container button{
+      float:right;
+      background: #ddd;
+      font-size: 17px;
+      border: none;
+      cursor: pointer;
     }
     </style>
   </head>
@@ -29,11 +39,12 @@
       <h1 class="tit">CRUD Manage Students</h1>
       <a href="/add" class="btn btn-info">Add Students</a>
         <form action="/search" method="GET">
-          <input type="text" placeholder="name" name="name" class="search-container">
-          <button type="submit" class="search-container">Submit</button>
+          <input type="text" placeholder="MSSV" class="search-container">
+          <button type="submit" class="search-container button">Submit</button>
           <table class="table">
             <thead>
-              <th>id</th>
+              <th>STT</th>
+              <th>MSSV</th>
               <th>FirstName</th>
               <th>LastName</th>
               <th>Email</th>
@@ -44,13 +55,14 @@
                 for(var i=0;i<data.length;i++){
                   %> 
                   <tr>
-                    <td><%=data[i].id%></td>
+                    <td><%=data[i].STT%></td>
+                    <td><%=data[i].MSSV%></td>
                     <td><%=data[i].FirstName%></td>
                     <td><%=data[i].LastName%></td>
                     <td><%=data[i].Email%></td>
                     <td>
-                      <a href="/edit/<%=data[i].id%>" class="btn btn-primary">Edit</a>
-                      <a href="/delete/<%=data[i].id%>" class="btn btn-danger">Delete</a>
+                      <a href="/edit/<%=data[i].STT%>" class="btn btn-primary">Edit</a>
+                      <a href="/delete/<%=data[i].STT%>" class="btn btn-danger">Delete</a>
                     </td>
                   </tr>
                   <%

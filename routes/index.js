@@ -16,15 +16,15 @@ router.get('/add',(req,res) => {
 })
 //Add Student//
 router.post('/add',(req,res) => {
-  dbConnect.query(`INSERT INTO students (FirstName, LastName, Email) VALUES ('${req.body.name[0]}','${req.body.name[1]}','${req.body.email}')`,function(err){
+  dbConnect.query(`INSERT INTO students (MSSV, FirstName, LastName, Email) VALUES ('${req.body.mssv}','${req.body.name[0]}','${req.body.name[1]}','${req.body.email}')`,function(err){
       if(err) throw err;
       alert('Added Successfully!');
       res.redirect('/');
   });
 });
 //Delete
-router.get('/delete/:id',(req,res) =>{
-  dbConnect.query(`DELETE from students WHERE id=${req.params.id}`, function(err){
+router.get('/delete/:STT',(req,res) =>{
+  dbConnect.query(`DELETE from students WHERE STT=${req.params.STT}`, function(err){
     if(err) throw err;
     alert('Deleted Successfully!');
     res.redirect('/');
@@ -32,11 +32,12 @@ router.get('/delete/:id',(req,res) =>{
 });
 
 //Edit
-router.get('/edit/:id', (req,res) =>{
-  var data = dbConnect.query(`SELECT * from students WHERE id=${req.params.id}`,function(err,result){
+router.get('/edit/:STT', (req,res) =>{
+  var data = dbConnect.query(`SELECT * from students WHERE STT=${req.params.STT}`,function(err,result){
     if(err) throw err;
     data = {
-      id:result[0].id,
+      STT:result[0].STT,
+      MSSV:result[0].MSSV,
       FirstName:result[0].FirstName,
       LastName:result[0].LastName,
       Email:result[0].Email
@@ -46,20 +47,19 @@ router.get('/edit/:id', (req,res) =>{
 });
 //Update
 router.post('/edit',(req,res)=>{
-  dbConnect.query(`UPDATE students SET Firstname='${req.body.name[0]}',LastName='${req.body.name[1]}',Email='${req.body.email}' where id=${req.body.id}`,function(err,result){
+  dbConnect.query(`UPDATE students SET MSSV='${req.body.mssv}',Firstname='${req.body.name[0]}',LastName='${req.body.name[1]}',Email='${req.body.email}' where STT=${req.body.STT}`,function(err,result){
     if(err) throw err;
     alert('Updated Successfully!');
     res.redirect('/');
   });
 });
 //Search
-router.get('/search', function(req, res){
-  var LastName = req.query.name[0];
-  var data = posts.filter(function(item){
-    return item.LastName === parseInt(LastName)
-  });
-  res.render('index',{
-    posts: data
+router.get('/search', (req,res)=>{
+  dbConnect.query(`SELECT * from students WHERE MSSV = '${req.params.mssv}'`,function(err,data,fields){
+    if(err) throw err;
+    res.send('index',{
+      products: data
+    });
   });
 });
 //Export file csv 
