@@ -33,7 +33,7 @@ router.get('/delete/:STT',(req,res) =>{
 
 //Edit
 router.get('/edit/:STT', (req,res) =>{
-  var data = dbConnect.query(`SELECT * from students WHERE STT=${req.params.STT}`,function(err,result){
+  var data = dbConnectn.query(`SELECT * from students WHERE STT=${req.params.STT}`,function(err,result){
     if(err) throw err;
     data = {
       STT:result[0].STT,
@@ -55,10 +55,12 @@ router.post('/edit',(req,res)=>{
 });
 //Search
 router.get('/search', (req,res)=>{
-  dbConnect.query(`SELECT * from students WHERE MSSV = '${req.params.mssv}'`,function(err,data,fields){
+  console.log("SEARCHING", req.query)
+  dbConnect.query(`SELECT * from students WHERE MSSV = '${req.query.mssv}'`,function(err,data,fields){
     if(err) throw err;
-    res.send('index',{
-      products: data
+    console.log({ data })
+    res.status(200).render('index',{
+      data
     });
   });
 });
