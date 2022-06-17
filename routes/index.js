@@ -51,7 +51,16 @@ router.post('/edit',(req,res)=>{
     alert('Updated Successfully!');
     res.redirect('/');
   });
-  
+});
+//Search
+router.get('/search', function(req, res){
+  var LastName = req.query.name[0];
+  var data = posts.filter(function(item){
+    return item.LastName === parseInt(LastName)
+  });
+  res.render('index',{
+    posts: data
+  });
 });
 //Export file csv 
 // router.get('/export-csv',(req,res) => {
