@@ -16,7 +16,7 @@ router.get('/add',(req,res) => {
 })
 //Add Student//
 router.post('/add',(req,res) => {
-  dbConnect.query(`INSERT INTO students (MSSV, FirstName, LastName, Email) VALUES ('${req.body.mssv}','${req.body.name[0]}','${req.body.name[1]}','${req.body.email}')`,function(err){
+  dbConnect.query(`INSERT INTO students (MSSV, Password, FirstName, LastName, Email) VALUES ('${req.body.mssv}','${req.body.password}','${req.body.name[0]}','${req.body.name[1]}','${req.body.email}')`,function(err){
       if(err) throw err;
       alert('Added Successfully!');
       res.redirect('/');
@@ -38,6 +38,7 @@ router.get('/edit/:STT', (req,res) =>{
     data = {
       STT:result[0].STT,
       MSSV:result[0].MSSV,
+      Password:result[0].Password,
       FirstName:result[0].FirstName,
       LastName:result[0].LastName,
       Email:result[0].Email
@@ -47,7 +48,7 @@ router.get('/edit/:STT', (req,res) =>{
 });
 //Update
 router.post('/edit',(req,res)=>{
-  dbConnect.query(`UPDATE students SET MSSV='${req.body.mssv}',Firstname='${req.body.name[0]}',LastName='${req.body.name[1]}',Email='${req.body.email}' where STT=${req.body.STT}`,function(err,result){
+  dbConnect.query(`UPDATE students SET MSSV='${req.body.mssv}',Password='${req.body.password}',Firstname='${req.body.name[0]}',LastName='${req.body.name[1]}',Email='${req.body.email}' where STT=${req.body.STT}`,function(err,result){
     if(err) throw err;
     alert('Updated Successfully!');
     res.redirect('/');
